@@ -24,10 +24,17 @@ class App extends React.Component {
       }
      ]
   } 
+  removeContact = (contact) => 
+  {
+    this.setState((currentState)=>
+    ({
+      contacts:currentState.contacts.filter((cont) => cont!==contact)
+    }))
+  }
   render(){
   return (
     <div className="App">
-    <ListContacts contacts={this.state.contacts}/>
+    <ListContacts contacts={this.state.contacts} removeContact={this.removeContact}/>
     </div>
   );
   }
