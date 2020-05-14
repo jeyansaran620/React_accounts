@@ -12,6 +12,7 @@ class App extends React.Component {
     ({
       contacts:currentState.contacts.filter((cont) => cont!==contact)
     }))
+    ContactsAPI.remove(contact);
   }
   componentDidMount ()
   {
