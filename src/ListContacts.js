@@ -16,8 +16,14 @@ class ListContacts extends Component {
          query:value.trim()
         }))
     }
+   
     render() {
+        const ShowingContacts = this.props.contacts.filter((contact) =>
+        {
+            return contact.name.toUpperCase().includes(this.state.query.toUpperCase())
+        })
   return (
+      
       <div className='list-contacts'>
       <div className='list-contacts-top'>
       <input className='search-contacts'
@@ -25,11 +31,13 @@ class ListContacts extends Component {
       onChange={(e) => this.handleSearchChange(e.target.value) }
       />
       </div>
+      {this.state.query !=='' && <div className='showing-contacts'>
+      <span>showing {ShowingContacts.length} of {this.props.contacts.length}</span>
+      <button onClick={() => this.handleSearchChange('')}>show all</button>
+      </div>
+    }
          <ol className='contact-list'>
-         {this.props.contacts.filter((contact) =>
-            {
-                return contact.name.toUpperCase().includes(this.state.query.toUpperCase())
-            }).map((contact) => 
+         {ShowingContacts.map((contact) => 
              <li key={contact.id} className='contact-list-item'>
              <div className='contact-avatar' 
              style={{backgroundImage:`url(${contact.avatarURL})`}}></div>
